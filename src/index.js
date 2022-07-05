@@ -30,13 +30,22 @@ module.exports = function toReadable (number) {
     current3 = Math.trunc(number / 100);
     current4 = number.toString().slice(1);
     current5 = number.toString().slice(2);
+    current6 = number.toString()[1];
+    // current7 = number.toString().slice(1, 3);
+    // console.log(current4);
+    // console.log(current7);
     for(let i = 0; i <= current3; i++) {
-      if(current4 && current5 === '0') {
+      if(current4 === '00') {
         result = `${numBeforeNineteen[i]} ${numBeforeNineHundredNinetyNine[0]}`;
+      } else if(current6 === '0') {
+        result = `${numBeforeNineteen[i]} ${numBeforeNineHundredNinetyNine[0]} ${numBeforeNineteen[current5]}`;
+      } else if(current6 === '1') {
+        result = `${numBeforeNineteen[i]} ${numBeforeNineHundredNinetyNine[0]} ${numBeforeNineteen[current4]}`;
+      } else if(current4 !== '00' && current5 === '0') {
+        result = `${numBeforeNineteen[i]} ${numBeforeNineHundredNinetyNine[0]} ${numBeforeNinetyNine[current6 - 2]}`;
       } else {
-        result = `${numBeforeNineteen[i]} ${numBeforeNineHundredNinetyNine[0]} ${numBeforeNineteen[current5]}`
-      };
-      // result = `${numBeforeNineteen[i]} ${numBeforeNineHundredNinetyNine[0]} ${numBeforeNineteen[current4]}`;
+        result = `${numBeforeNineteen[i]} ${numBeforeNineHundredNinetyNine[0]} ${numBeforeNinetyNine[current6 - 2]} ${numBeforeNineteen[current5]}`;
+      }
     }
 
 
