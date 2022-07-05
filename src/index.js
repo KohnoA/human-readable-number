@@ -16,18 +16,27 @@ module.exports = function toReadable (number) {
 
   } else if(number < 100) {
     current = Math.trunc(number / 10);
+    current2 = number.toString().slice(1);
     for(let i = 0; i <= current; i++) {
       if(number % 10 === 0) {
         result = numBeforeNinetyNine[i - 2];
       } else {
-        result = numBeforeNinetyNine[i - 2] + ' one';
+        result = `${numBeforeNinetyNine[i - 2]} ${numBeforeNineteen[current2]}`;
       }
     }
 
 
   } else if(number < 1000) {
-    for(let i = 0; i <= number; i++) {
-      result = numBeforeNineHundredNinetyNine[0];
+    current3 = Math.trunc(number / 100);
+    current4 = number.toString().slice(1);
+    current5 = number.toString().slice(2);
+    for(let i = 0; i <= current3; i++) {
+      if(current4 && current5 === '0') {
+        result = `${numBeforeNineteen[i]} ${numBeforeNineHundredNinetyNine[0]}`;
+      } else {
+        result = `${numBeforeNineteen[i]} ${numBeforeNineHundredNinetyNine[0]} ${numBeforeNineteen[current5]}`
+      };
+      // result = `${numBeforeNineteen[i]} ${numBeforeNineHundredNinetyNine[0]} ${numBeforeNineteen[current4]}`;
     }
 
 
@@ -39,4 +48,6 @@ module.exports = function toReadable (number) {
 }
 
 
-console.log(module.exports(30));
+console.log(module.exports(110));
+
+//Когда решу задачу: удалить пробелы, переназвать некоторые переменные для читаемости кода
